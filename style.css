@@ -5,13 +5,47 @@ body {
     font-family: "Inter", sans-serif;
 }
 
+/* ===== MENU ===== */
+header {
+    background-color: #1565c0; /* azul */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 15px 0;
+    margin: 0;
+    gap: 50px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 17px;
+    transition: opacity 0.3s ease;
+}
+
+nav ul li a:hover {
+    opacity: 0.7;
+}
+
+/* ===== BANNER ===== */
 #banner {
     height: 45vw;
     background-image: url(imagens/header.png);
     background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
     color: white;
+    margin-top: 30px; /* espaço pro menu fixo */
 }
 
 #conteudo_banner {
@@ -29,6 +63,7 @@ body {
     margin-top: 15px;
 }
 
+/* ===== BOTÕES ===== */
 #btn_cadastro_aluno, 
 #btn_cadastro_voluntario,
 #btn_cadastro_aluno2,
@@ -46,29 +81,27 @@ body {
 
 #btn_cadastro_voluntario, 
 #btn_cadastro_voluntario2 {
-    background-color: #1565c0;
+    background-color: #0d47a1;
 }
 
+/* ===== SEÇÕES ===== */
 .secao_clara {
     background-color: #f5f5f5;
+    color: #000;
 }
 
 .secao_escura {
     background-color: #202226;
+    color: white;
 }
 
 .secoes {
     display: flex;
-    color: white;
     justify-content: center;
     align-items: center;
     padding: 60px 20px;
     flex-wrap: wrap;
     text-align: center;
-}
-
-.secao_clara {
-    color: #000;
 }
 
 .conteudo_secao {
@@ -80,6 +113,7 @@ body {
     width: 170px;
     margin: 20px;
 }
+
 .icones1 {
     width: 120px;
     margin: 20px;
@@ -95,7 +129,9 @@ body {
     font-weight: bold;
 }
 
+/* ===== RODAPÉ ===== */
 #copyright {
     font-size: 14px;
     text-align: center;
+    padding: 15px 0;
 }
