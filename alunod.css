@@ -77,15 +77,20 @@ input:focus {
     background-color: #00a946;
 }
 
-.link {
+/* Links (Esqueceu / Criar conta) */
+.links {
     text-align: center;
     margin-top: 10px;
-    color: #1565c0;
-    font-weight: 600;
-    cursor: pointer;
 }
 
-.link:hover {
+.links a {
+    color: #1565c0;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.links a:hover {
     text-decoration: underline;
 }
 

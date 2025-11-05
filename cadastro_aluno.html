@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Aluno | APE</title>
+    <link rel="stylesheet" href="style_login.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Aluno</h1>
+
+        <form id="formAluno" onsubmit="return validarSenha('aluno')">
+            <label>Nome Completo:</label>
+            <input type="text" required>
+
+            <label>Email:</label>
+            <input type="email" required>
+
+            <label>CPF:</label>
+            <input type="text" maxlength="14" placeholder="000.000.000-00" required>
+
+            <label>Data de Nascimento:</label>
+            <input type="date" required>
+
+            <label>Senha:</label>
+            <div class="senha-container">
+                <input type="password" id="senhaAluno" required>
+                <span class="toggle" onclick="mostrarSenha('senhaAluno')">👁️</span>
+            </div>
+
+            <label>Confirmar Senha:</label>
+            <div class="senha-container">
+                <input type="password" id="confirmarAluno" required>
+                <span class="toggle" onclick="mostrarSenha('confirmarAluno')">👁️</span>
+            </div>
+
+            <p id="erroAluno" class="erro"></p>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <button class="voltar" onclick="window.location.href='index.html'">⬅️ Voltar</button>
+    </div>
+
+    <script>
+        function mostrarSenha(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === "password" ? "text" : "password";
+        }
+
+        function validarSenha(tipo) {
+            const senha = document.getElementById("senhaAluno").value;
+            const confirmar = document.getElementById("confirmarAluno").value;
+            const erro = document.getElementById("erroAluno");
+
+            const regexMaiuscula = /[A-Z]/;
+            const regexNumero = /(\d)(?!.*\1)/; 
+            const regexEspecial = /[@#]/;
+
+            if (!regexMaiuscula.test(senha)) {
+                erro.textContent = "A senha deve conter pelo menos uma letra maiúscula.";
+                return false;
+            }
+            if (!regexNumero.test(senha)) {
+                erro.textContent = "A senha deve conter pelo menos um número que não se repita.";
+                return false;
+            }
+            if (!regexEspecial.test(senha)) {
+                erro.textContent = "A senha deve conter @ ou #.";
+                return false;
+            }
+            if (senha !== confirmar) {
+                erro.textContent = "As senhas não coincidem.";
+                return false;
+            }
+
+            erro.textContent = "";
+            alert("Cadastro de aluno realizado com sucesso!");
+            return true;
+        }
+    </script>
+</body>
+</html>

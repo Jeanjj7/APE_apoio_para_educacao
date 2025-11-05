@@ -13,11 +13,18 @@
     <!-- Menu de Navegação -->
     <header>
         <nav>
+            <div class="logo">
+                <h2>APE - Apoio para Educação</h2>
+            </div>
             <ul>
                 <li><a href="#banner">Início</a></li>
                 <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#voluntarios">Voluntários</a></li>
                 <li><a href="#alunos">Alunos</a></li>
+                <li><a href="#feedback">Feedback</a></li>
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#parceiros">Parceiros</a></li>
+                <li><a href="#materiais">Materiais</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
         </nav>
@@ -33,7 +40,6 @@
                 <p>Juntos podemos transformar a educação!</p>
                 <p>Cadastre-se agora e encontre apoio educacional gratuito.</p>
 
-                <!-- Botões com redirecionamento -->
                 <div id="btn_cadastro_aluno" onclick="window.location.href='login_aluno.html'">
                     Sou Aluno
                 </div>
@@ -82,6 +88,118 @@
         </div>
     </div>
 
+    <!-- Seção Feedback -->
+    <div id="feedback" class="secoes secao_escura">
+        <div class="conteudo_secao">
+            <h1>O que dizem nossos <span class="texto_verde">Voluntários</span> e <span class="texto_azul">Alunos</span></h1>
+            <p>Confira alguns depoimentos e deixe o seu comentário abaixo.</p>
+
+            <div class="cards-feedback">
+                <div class="card">
+                    <img src="imagens/voluntario1.png" alt="Voluntário 1">
+                    <h3>Mariana Silva</h3>
+                    <p>“Ser voluntária no APE tem sido uma experiência incrível! Ver o progresso dos alunos é gratificante.”</p>
+                </div>
+
+                <div class="card">
+                    <img src="imagens/aluno1.png" alt="Aluno 1">
+                    <h3>Lucas Andrade</h3>
+                    <p>“Consegui melhorar minhas notas com a ajuda dos voluntários. Eles realmente se importam em ensinar.”</p>
+                </div>
+
+                <div class="card">
+                    <img src="imagens/voluntario2.png" alt="Voluntário 2">
+                    <h3>Paulo Santos</h3>
+                    <p>“O APE é uma forma de contribuir para um futuro melhor. Ensinar é também aprender todos os dias.”</p>
+                </div>
+            </div>
+
+            <!-- NOVA ÁREA DE COMENTÁRIOS -->
+            <div class="comentarios">
+                <h2>Deixe seu comentário 💬</h2>
+                <form id="formComentario">
+                    <input type="text" id="nome" placeholder="Seu nome" required>
+                    <textarea id="mensagem" rows="4" placeholder="Escreva seu comentário..." required></textarea>
+
+                    <div class="estrelas">
+                        <span class="estrela" onclick="avaliar(1)">★</span>
+                        <span class="estrela" onclick="avaliar(2)">★</span>
+                        <span class="estrela" onclick="avaliar(3)">★</span>
+                        <span class="estrela" onclick="avaliar(4)">★</span>
+                        <span class="estrela" onclick="avaliar(5)">★</span>
+                    </div>
+
+                    <button type="submit">Enviar Comentário</button>
+                </form>
+
+                <div id="listaComentarios"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção Como Funciona -->
+    <div id="como-funciona" class="secoes secao_clara">
+        <div class="conteudo_secao">
+            <h1>Como Funciona o <span class="texto_azul">APE</span></h1>
+            <p>O APE conecta alunos e voluntários de forma simples e gratuita. Veja como participar:</p>
+            <ul class="lista-funciona">
+                <li><strong>1️⃣ Cadastro:</strong> o aluno ou voluntário realiza seu registro no site.</li>
+                <li><strong>2️⃣ Conexão:</strong> a equipe APE analisa as informações e conecta perfis compatíveis.</li>
+                <li><strong>3️⃣ Aulas:</strong> as aulas acontecem online, por vídeo ou chat, em horários combinados.</li>
+                <li><strong>4️⃣ Acompanhamento:</strong> a equipe monitora o progresso e coleta feedbacks de todos.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Seção Parceiros -->
+    <div id="parceiros" class="secoes secao_escura">
+        <div class="conteudo_secao">
+            <h1>Nossos <span class="texto_verde">Parceiros</span> e <span class="texto_azul">Apoiadores</span></h1>
+            <p>Essas instituições acreditam no poder da educação e ajudam o APE a continuar sua missão.</p>
+
+            <div class="logos-parceiros">
+                <img src="imagens/parceiro1.png" alt="Parceiro 1">
+                <img src="imagens/parceiro2.png" alt="Parceiro 2">
+                <img src="imagens/parceiro3.png" alt="Parceiro 3">
+            </div>
+        </div>
+    </div>
+
+    <!-- Seção Materiais -->
+    <div id="materiais" class="secoes secao_clara">
+        <div class="conteudo_secao">
+            <h1>Cursos e <span class="texto_azul">Materiais Gratuitos</span></h1>
+            <p>Os voluntários do APE oferecem apoio nas principais matérias escolares, com aulas e materiais didáticos online.</p>
+
+            <div class="materias">
+                <div class="materia">
+                    <h3>📘 Português</h3>
+                    <p>Leitura, interpretação de texto e redação guiadas por voluntários experientes.</p>
+                </div>
+
+                <div class="materia">
+                    <h3>🧮 Matemática</h3>
+                    <p>Reforço em operações, álgebra e geometria, com exercícios passo a passo.</p>
+                </div>
+
+                <div class="materia">
+                    <h3>🔬 Ciências</h3>
+                    <p>Conceitos práticos e experiências que tornam o aprendizado mais leve e divertido.</p>
+                </div>
+
+                <div class="materia">
+                    <h3>🌍 História e Geografia</h3>
+                    <p>Entendimento do mundo e da sociedade com apoio de mapas e linhas do tempo.</p>
+                </div>
+            </div>
+
+            <p class="explicacao-voluntario">
+                Os voluntários compartilham seus conhecimentos por meio de encontros virtuais, explicações gravadas e troca de mensagens.
+                Cada um dedica um pouco do seu tempo para transformar a vida de alunos em todo o país!
+            </p>
+        </div>
+    </div>
+
     <!-- Contato -->
     <div id="contato" class="secoes secao_escura">
         <div class="conteudo_secao">
@@ -95,6 +213,44 @@
     <div id="copyright" class="secoes secao_escura">
         ©2025 - Projeto APE - Todos os direitos reservados
     </div>
+
+    <script>
+        let avaliacao = 0;
+
+        function avaliar(valor) {
+            avaliacao = valor;
+            const estrelas = document.querySelectorAll('.estrela');
+            estrelas.forEach((estrela, index) => {
+                estrela.style.color = index < valor ? 'gold' : 'gray';
+            });
+        }
+
+        document.getElementById("formComentario").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const nome = document.getElementById("nome").value;
+            const mensagem = document.getElementById("mensagem").value;
+            const lista = document.getElementById("listaComentarios");
+
+            if (avaliacao === 0) {
+                alert("Por favor, selecione uma avaliação com estrelas ⭐");
+                return;
+            }
+
+            const novoComentario = document.createElement("div");
+            novoComentario.classList.add("comentario");
+            novoComentario.innerHTML = `
+                <h3>${nome}</h3>
+                <div class="estrelas-avaliadas">${"★".repeat(avaliacao)}${"☆".repeat(5 - avaliacao)}</div>
+                <p>${mensagem}</p>
+                <hr>
+            `;
+            lista.prepend(novoComentario);
+
+            document.getElementById("formComentario").reset();
+            avaliar(0);
+        });
+    </script>
 
 </body>
 </html>

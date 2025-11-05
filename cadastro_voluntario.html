@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Voluntário | APE</title>
+    <link rel="stylesheet" href="style_login.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastro de Voluntário</h1>
+
+        <form id="formVoluntario" onsubmit="return validarSenha('voluntario')">
+            <label>Nome Completo:</label>
+            <input type="text" required>
+
+            <label>Email:</label>
+            <input type="email" required>
+
+            <label>CPF:</label>
+            <input type="text" maxlength="14" placeholder="000.000.000-00" required>
+
+            <label>Data de Nascimento:</label>
+            <input type="date" required>
+
+            <label>Área de Ensino:</label>
+            <input type="text" placeholder="Ex: Matemática, Português..." required>
+
+            <label>Senha:</label>
+            <div class="senha-container">
+                <input type="password" id="senhaVoluntario" required>
+                <span class="toggle" onclick="mostrarSenha('senhaVoluntario')">👁️</span>
+            </div>
+
+            <label>Confirmar Senha:</label>
+            <div class="senha-container">
+                <input type="password" id="confirmarVoluntario" required>
+                <span class="toggle" onclick="mostrarSenha('confirmarVoluntario')">👁️</span>
+            </div>
+
+            <p id="erroVoluntario" class="erro"></p>
+
+            <button type="submit">Cadastrar</button>
+        </form>
+
+        <button class="voltar" onclick="window.location.href='index.html'">⬅️ Voltar</button>
+    </div>
+
+    <script>
+        function mostrarSenha(id) {
+            const input = document.getElementById(id);
+            input.type = input.type === "password" ? "text" : "password";
+        }
+
+        function validarSenha(tipo) {
+            const senha = document.getElementById("senhaVoluntario").value;
+            const confirmar = document.getElementById("confirmarVoluntario").value;
+            const erro = document.getElementById("erroVoluntario");
+
+            const regexMaiuscula = /[A-Z]/;
+            const regexNumero = /(\d)(?!.*\1)/; 
+            const regexEspecial = /[@#]/;
+
+            if (!regexMaiuscula.test(senha)) {
+                erro.textContent = "A senha deve conter pelo menos uma letra maiúscula.";
+                return false;
+            }
+            if (!regexNumero.test(senha)) {
+                erro.textContent = "A senha deve conter pelo menos um número que não se repita.";
+                return false;
+            }
+            if (!regexEspecial.test(senha)) {
+                erro.textContent = "A senha deve conter @ ou #.";
+                return false;
+            }
+            if (senha !== confirmar) {
+                erro.textContent = "As senhas não coincidem.";
+                return false;
+            }
+
+            erro.textContent = "";
+            alert("Cadastro de voluntário realizado com sucesso!");
+            return true;
+        }
+    </script>
+</body>
+</html>

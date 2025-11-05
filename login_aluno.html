@@ -5,29 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Aluno - APE</title>
-    <link rel="stylesheet" href="alunod.css ">
+    <link rel="stylesheet" href="alunod.css">
 </head>
 
 <body>
     <div class="login-container">
         <div class="login-box">
-            <img src="imagens/icone1.png" alt="Logo APE" class="logo">
+            <img src="imagens/logo_ape.png" alt="Logo APE" class="logo">
             <h1>Login do Aluno</h1>
 
             <form>
-                <label for="login">Login</label>
-                <input type="login" id="login" placeholder="Digite seu login" required>
+                <label for="email">E-mail</label>
+                <input type="email" id="email" placeholder="Digite seu e-mail" required>
 
                 <label for="senha">Senha</label>
                 <input type="password" id="senha" placeholder="Digite sua senha" required>
 
                 <button type="submit" class="btn">Entrar</button>
-                <p class="link">Esqueceu sua senha?</p>
+
+                <div class="links">
+                    <p><a href="#">Esqueceu sua senha?</a> | <a href="cadastro_aluno.html">Criar conta</a></p>
+                </div>
             </form>
 
-            <button class="btn-voltar" onclick="window.location.href='index.html'">Voltar</button>
+            <button class="btn-voltar" onclick="window.location.href='index.html'">← Voltar</button>
         </div>
     </div>
 </body>
 </html>
-
