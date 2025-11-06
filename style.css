@@ -29,6 +29,7 @@ nav {
     margin: 0;
 }
 
+/* ====== LISTA DO MENU ====== */
 nav ul {
     list-style: none;
     display: flex;
@@ -49,6 +50,20 @@ nav ul li a:hover {
     color: #00c853;
 }
 
+/* ====== BOTÃO MENU MOBILE ====== */
+.menu-toggle {
+    display: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.3s;
+}
+
+.menu-toggle.aberto {
+    transform: rotate(90deg);
+}
+
 /* ====== BANNER ====== */
 #banner {
     height: 45vw;
@@ -58,6 +73,7 @@ nav ul li a:hover {
     display: flex;
     align-items: center;
     color: white;
+    text-align: left;
 }
 
 #conteudo_banner {
@@ -286,6 +302,7 @@ nav ul li a:hover {
     padding: 20px;
     color: white;
 }
+
 /* ====== COMENTÁRIOS ====== */
 .comentarios {
     background-color: #2e2f33;
@@ -374,23 +391,39 @@ nav ul li a:hover {
     margin-bottom: 5px;
 }
 
-
 /* ====== RESPONSIVIDADE ====== */
-@media screen and (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        text-align: center;
+@media screen and (max-width: 900px) {
+    .menu-toggle {
+        display: block;
     }
 
     nav ul {
+        display: none;
         flex-direction: column;
-        gap: 15px;
-        margin-top: 10px;
+        width: 100%;
+        background-color: #0044cc;
+        margin-top: 15px;
+        border-radius: 10px;
     }
 
-    .logo h2 {
-        font-size: 20px;
-        margin-bottom: 10px;
+    nav ul.ativo {
+        display: flex;
+        animation: aparecer 0.3s ease;
+    }
+
+    @keyframes aparecer {
+        from {opacity: 0; transform: translateY(-10px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    nav ul li {
+        padding: 12px;
+    }
+
+    nav ul li a {
+        display: block;
+        color: #fff;
+        text-align: center;
     }
 
     #banner {
@@ -401,23 +434,23 @@ nav ul li a:hover {
 
     #conteudo_banner {
         width: 100%;
-        margin-left: 0;
+        margin: 0 auto;
     }
 
     #conteudo_banner h1 {
-        font-size: 5vw;
-        line-height: 6vw;
+        font-size: 6vw;
+        line-height: 7vw;
     }
 
     .secoes {
         flex-direction: column;
     }
 
-    .materia {
+    .materia, .card {
         width: 80%;
     }
 
-    .card {
-        width: 80%;
+    .comentarios {
+        padding: 20px;
     }
 }

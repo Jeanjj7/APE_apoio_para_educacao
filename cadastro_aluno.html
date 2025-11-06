@@ -5,7 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - Aluno | APE</title>
     <link rel="stylesheet" href="style_login.css">
+
+    <style>
+        /* Estilo do menu de matérias (abrir/fechar) */
+        .materias {
+            display: none;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .materias.ativa {
+            display: flex;
+            flex-direction: column;
+        }
+        .abrir-materias {
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-weight: 600;
+            margin-top: 8px;
+            transition: background-color 0.2s;
+        }
+        .abrir-materias:hover {
+            background-color: #e8f5e9;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Cadastro de Aluno</h1>
@@ -22,6 +50,17 @@
 
             <label>Data de Nascimento:</label>
             <input type="date" required>
+
+            <label>Matéria de Interesse:</label>
+            <div class="abrir-materias" onclick="alternarMaterias()">
+                ➕ Clique para escolher matérias
+            </div>
+            <div class="materias" id="listaMaterias">
+                <label><input type="checkbox" name="materia" value="Matemática"> Matemática</label>
+                <label><input type="checkbox" name="materia" value="Português"> Português</label>
+                <label><input type="checkbox" name="materia" value="Inglês"> Inglês</label>
+                <label><input type="checkbox" name="materia" value="História"> História</label>
+            </div>
 
             <label>Senha:</label>
             <div class="senha-container">
@@ -47,6 +86,19 @@
         function mostrarSenha(id) {
             const input = document.getElementById(id);
             input.type = input.type === "password" ? "text" : "password";
+        }
+
+        function alternarMaterias() {
+            const materias = document.getElementById("listaMaterias");
+            const botao = document.querySelector(".abrir-materias");
+
+            if (materias.classList.contains("ativa")) {
+                materias.classList.remove("ativa");
+                botao.innerHTML = "➕ Clique para escolher matérias";
+            } else {
+                materias.classList.add("ativa");
+                botao.innerHTML = "➖ Ocultar matérias";
+            }
         }
 
         function validarSenha(tipo) {
