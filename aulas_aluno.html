@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aulas do Aluno - APE</title>
+    <link rel="stylesheet" href="style_aulas.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>🎓 Bem-vindo às suas aulas!</h1>
+        <p>Escolha uma categoria para assistir:</p>
+
+        <div class="categorias">
+            <div class="card" onclick="abrirSecao('ao-vivo')">🔴 Aulas ao vivo</div>
+            <div class="card" onclick="abrirSecao('gravadas')">🎥 Aulas gravadas</div>
+            <div class="card" onclick="abrirSecao('materiais')">📘 Materiais de apoio</div>
+        </div>
+
+        <div id="conteudo" class="conteudo"></div>
+    </div>
+
+    <script>
+        function abrirSecao(tipo) {
+            const conteudo = document.getElementById('conteudo');
+
+            if (tipo === 'ao-vivo') {
+                conteudo.innerHTML = `
+                    <h2>🔴 Aula ao Vivo</h2>
+                    <p>Participe da aula em tempo real com seu professor voluntário.</p>
+
+                    <div class="meet-container">
+                        <p><strong>Matéria:</strong> Matemática - Equações do 1º Grau</p>
+                        <p><strong>Horário:</strong> 14:00 às 15:00</p>
+                        <a href="https://meet.google.com/abc-defg-hij" target="_blank" class="botao-meet">Entrar na Aula (Google Meet)</a>
+                    </div>
+
+                    <p style="margin-top:20px;">⚠️ A aula ao vivo será gravada e ficará disponível posteriormente na seção "Aulas Gravadas".</p>
+                `;
+            } 
+            else if (tipo === 'gravadas') {
+                conteudo.innerHTML = `
+                    <h2>🎥 Aulas Gravadas</h2>
+                    <p>Assista às aulas anteriores:</p>
+                    <ul class="lista-aulas">
+                        <li><a href="https://www.youtube.com/watch?v=XXXX" target="_blank">📘 Português - Leitura e Interpretação</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=YYYY" target="_blank">🧮 Matemática - Frações e Decimais</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=ZZZZ" target="_blank">🔬 Ciências - Corpo Humano</a></li>
+                        <li><a href="https://www.youtube.com/watch?v=AAAA" target="_blank">🏛 História - Revolução Industrial</a></li>
+                    </ul>
+                `;
+            } 
+            else {
+                conteudo.innerHTML = `
+                    <h2>📘 Materiais de Apoio</h2>
+                    <p>Baixe os materiais em PDF para estudar offline:</p>
+                    <ul class="lista-materiais">
+                        <li><a href="materiais/portugues.pdf" download>📄 Português</a></li>
+                        <li><a href="materiais/matematica.pdf" download>📄 Matemática</a></li>
+                        <li><a href="materiais/ciencias.pdf" download>📄 Ciências</a></li>
+                        <li><a href="materiais/historia.pdf" download>📄 História</a></li>
+                    </ul>
+                `;
+            }
+        }
+    </script>
+
+</body>
+</html>
