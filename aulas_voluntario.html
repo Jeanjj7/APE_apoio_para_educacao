@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Aulas do Voluntário - APE</title>
+
+    <style>
+        :root {
+            --azul: #1565c0;
+            --verde: #00c853;
+            --bg: linear-gradient(135deg, #1565c0, #00c853);
+            --card: #ffffff;
+            --muted: #6b6b6b;
+        }
+
+        * { box-sizing: border-box }
+
+        body {
+            margin: 0;
+            font-family: Inter, Arial, sans-serif;
+            background: var(--bg);
+            min-height: 100vh;
+            padding: 28px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 980px;
+            background: var(--card);
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+        }
+
+        h1 { color: var(--azul); margin: 6px 0 14px; font-size: 24px }
+        p.lead { color: var(--muted); margin-bottom: 18px }
+
+        .categorias {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
+        }
+
+        .card-btn {
+            flex: 1;
+            min-width: 150px;
+            padding: 14px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 700;
+            color: #fff;
+            background: var(--azul);
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .card-btn.ativo {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        }
+
+        .card-btn.medio { background: #0b72a6 }
+        .card-btn.secundario { background: #444 }
+
+        .conteudo { margin-top: 10px }
+
+        form label { margin-top: 10px; display: block; font-weight: bold }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid #bbb;
+            margin-top: 6px;
+            font-size: 14px;
+        }
+
+        textarea { resize: vertical; }
+
+        .btn {
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn.primary { background: var(--verde); color: #fff }
+        .btn.warn { background: #ff7043; color: #fff }
+        .btn.ghost { background: transparent; border: 1px solid #ccc; color: var(--azul) }
+
+        ul.lista-aulas {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        ul.lista-aulas li {
+            background: #f7f7f7;
+            border-left: 6px solid var(--azul);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        video {
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>👨‍🏫 Painel do Voluntário – APE</h1>
+    <p class="lead">Gerencie suas aulas ao vivo, gravações e materiais.</p>
+
+    <div class="categorias">
+        <div class="card-btn" id="btn-ao-vivo" onclick="abrirSecao('ao-vivo')">🔴 Aulas ao vivo</div>
+        <div class="card-btn medio" id="btn-agendadas" onclick="abrirSecao('agendadas')">📅 Próximas aulas</div>
+        <div class="card-btn" id="btn-gravadas" onclick="abrirSecao('gravadas')">🎥 Aulas gravadas</div>
+        <div class="card-btn secundario" id="btn-materiais" onclick="abrirSecao('materiais')">📘 Materiais</div>
+    </div>
+
+    <div id="conteudo" class="conteudo"></div>
+</div>
+
+<script>
+
+let aulasCadastradas = [];
+
+// =======================
+// MARCAR BOTÃO ATIVO
+// =======================
+function marcarBotaoAtivo(secao) {
+    document.querySelectorAll('.card-btn').forEach(btn => btn.classList.remove('ativo'));
+    document.getElementById(`btn-${secao}`)?.classList.add("ativo");
+}
+
+// =======================
+// ABRIR SEÇÃO
+// =======================
+function abrirSecao(tipo) {
+    marcarBotaoAtivo(tipo);
+    const c = document.getElementById("conteudo");
+
+    // 🔴 AULAS AO VIVO — FORMULÁRIO
+    if (tipo === "ao-vivo") {
+        c.innerHTML = `
+            <h2 style="color:var(--azul)">🔴 Cadastrar Aula ao Vivo</h2>
+
+            <form id="formAula" onsubmit="event.preventDefault(); salvarAula();">
+                <label>Matéria</label>
+                <select id="materia" required>
+                    <option>Matemática</option>
+                    <option>Português</option>
+                    <option>Inglês</option>
+                    <option>História</option>
+                </select>
+
+                <label>Título</label>
+                <input id="titulo" required>
+
+                <label>Data</label>
+                <input type="date" id="data_sessao" required>
+
+                <label>Início</label>
+                <input type="time" id="hora_inicio" required>
+
+                <label>Término</label>
+                <input type="time" id="hora_fim" required>
+
+                <label>Link do Meet</label>
+                <input id="meet" type="url" required placeholder="https://meet.google.com/...">
+
+                <label>Descrição</label>
+                <textarea id="descricao"></textarea>
+
+                <button class="btn primary">Cadastrar Aula</button>
+            </form>
+        `;
+    }
+
+    // 📅 PRÓXIMAS AULAS
+    else if (tipo === "agendadas") {
+        const futuras = aulasCadastradas.filter(a => new Date(a.data + "T" + a.inicio) >= new Date());
+
+        let html = `<h2 style="color:var(--azul)">📅 Próximas aulas</h2>`;
+
+        if (futuras.length === 0) {
+            html += `<p>Nenhuma aula agendada.</p>`;
+        } else {
+            html += `<ul class="lista-aulas">`;
+
+            futuras.forEach(a => {
+                html += `
+                    <li>
+                        <strong>${a.materia} — ${a.titulo}</strong><br>
+                        ${formatarData(a.data)} • ${a.inicio} às ${a.fim}<br>
+                        <a href="${a.meet}" target="_blank">🔗 Abrir Meet</a>
+                        <br><br>
+                        <button class="btn warn" onclick="removerAula(${a._id})">Excluir</button>
+                    </li>
+                `;
+            });
+
+            html += `</ul>`;
+        }
+
+        c.innerHTML = html;
+    }
+
+    // 🎥 AULAS GRAVADAS
+    else if (tipo === "gravadas") {
+
+        const passadas = aulasCadastradas.filter(a => new Date(a.data + "T" + a.inicio) < new Date());
+
+        let html = `
+            <h2 style="color:var(--azul)">🎥 Aulas Gravadas</h2>
+
+            <form onsubmit="event.preventDefault(); salvarGravacao();">
+                <label>Selecionar aula</label>
+                <select id="selectAula" required>
+                    <option value="">Selecione</option>
+        `;
+
+        passadas.forEach(a => {
+            html += `<option value="${a._id}">${a.materia} – ${a.titulo} (${formatarData(a.data)})</option>`;
+        });
+
+        html += `
+                </select>
+
+                <label>Link do vídeo (YouTube ou Drive):</label>
+                <input id="linkVideo" type="url" placeholder="https://youtu.be/...">
+
+                <label>Ou enviar vídeo MP4:</label>
+                <input id="arquivoVideo" type="file" accept="video/mp4">
+
+                <button class="btn primary">Salvar gravação</button>
+            </form>
+
+            <hr><br>
+            <h3>📚 Lista de Aulas Gravadas</h3>
+        `;
+
+        if (passadas.length === 0) {
+            html += `<p>Nenhuma aula gravada ainda.</p>`;
+        } else {
+            html += `<ul class="lista-aulas">`;
+
+            passadas.forEach(a => {
+                html += `<li>
+                            <strong>${a.materia} — ${a.titulo}</strong><br>
+                            ${formatarData(a.data)} • ${a.inicio} às ${a.fim}<br>
+                `;
+
+                if (a.videoURL) {
+                    html += `<video controls><source src="${a.videoURL}" type="video/mp4"></video>`;
+                } else if (a.videoLink) {
+                    html += `<a href="${a.videoLink}" target="_blank">▶ Assistir gravação</a>`;
+                } else {
+                    html += `<p>Sem gravação enviada.</p>`;
+                }
+
+                html += `</li>`;
+            });
+
+            html += `</ul>`;
+        }
+
+        c.innerHTML = html;
+    }
+
+    // 📘 MATERIAIS
+    else if (tipo === "materiais") {
+        c.innerHTML = `
+            <h2 style="color:var(--azul)">📘 Materiais</h2>
+            <p>Em breve será possível enviar PDFs para os alunos.</p>
+        `;
+    }
+}
+
+// ==========================
+// SALVAR AULA
+// ==========================
+function salvarAula() {
+    const aula = {
+        _id: Date.now(),
+        materia: materia.value,
+        titulo: titulo.value,
+        data: data_sessao.value,
+        inicio: hora_inicio.value,
+        fim: hora_fim.value,
+        meet: meet.value,
+        descricao: descricao.value
+    };
+
+    aulasCadastradas.push(aula);
+    alert("Aula cadastrada!");
+    abrirSecao("agendadas");
+}
+
+// ==========================
+// REMOVER AULA
+// ==========================
+function removerAula(id) {
+    aulasCadastradas = aulasCadastradas.filter(a => a._id !== id);
+    abrirSecao("agendadas");
+}
+
+// ==========================
+// SALVAR GRAVAÇÃO
+// ==========================
+function salvarGravacao() {
+    const id = selectAula.value;
+    const aula = aulasCadastradas.find(a => a._id == id);
+
+    const arquivo = arquivoVideo.files[0];
+    const link = linkVideo.value.trim();
+
+    if (link) {
+        aula.videoLink = link;
+        alert("Link salvo!");
+    } else if (arquivo) {
+        aula.videoURL = URL.createObjectURL(arquivo);
+        alert("Vídeo MP4 salvo!");
+    } else {
+        alert("Envie um arquivo ou link!");
+        return;
+    }
+
+    abrirSecao("gravadas");
+}
+
+function formatarData(d) {
+    let p = d.split("-");
+    return `${p[2]}/${p[1]}/${p[0]}`;
+}
+
+abrirSecao("ao-vivo");
+
+</script>
+
+</body>
+</html>

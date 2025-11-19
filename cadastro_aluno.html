@@ -76,17 +76,13 @@
 
             <p id="erroAluno" class="erro"></p>
 
-            <button type="submit" onclick="irParaAulas(event)">Cadastrar</button>
+            <button type="submit" >Cadastrar</button>
         </form>
 
-        <button class="voltar" onclick="window.location.href='index.html'">⬅️ Voltar</button>
+        <button class="voltar" onclick="window.location.href='login_aluno.html'">⬅️ Voltar</button>
     </div>
 
-    <script>
-        function irParaAulas(event) {
-            event.preventDefault(); 
-            window.location.href = "aulas_aluno.html"; 
-}
+ <script>
         function mostrarSenha(id) {
             const input = document.getElementById(id);
             input.type = input.type === "password" ? "text" : "password";

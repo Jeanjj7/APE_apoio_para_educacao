@@ -21,7 +21,7 @@
                 <label for="senha">Senha</label>
                 <input type="password" id="senha" placeholder="Digite sua senha" required>
 
-                <button type="submit" class="btn">Entrar</button>
+                <button type="submit" class="btn" onclick="irParaAulas(event)">Entrar</button>
 
                 <div class="links">
                     <p><a href="#">Esqueceu sua senha?</a> | <a href="cadastro_voluntario.html">Criar conta</a></p>
@@ -31,5 +31,11 @@
             <button class="btn-voltar" onclick="window.location.href='index.html'">← Voltar</button>
         </div>
     </div>
+           <script>
+        function irParaAulas(event) {
+            event.preventDefault(); 
+            window.location.href = "aulas_voluntario.html"; 
+}
+    </script>
 </body>
 </html>

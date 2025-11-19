@@ -112,7 +112,7 @@
             </div>
 
             <!-- ====== COMENTÁRIOS ====== -->
-            <div class="comentarios">
+            <!-- <div class="comentarios">
                 <h2>Deixe seu comentário 💬</h2>
                 <form id="formComentario">
                     <input type="text" id="nome" placeholder="Seu nome" required>
@@ -129,7 +129,7 @@
                 <div id="listaComentarios"></div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- ====== SEÇÃO COMO FUNCIONA ====== -->
     <div id="como-funciona" class="secoes secao_clara">
@@ -183,37 +183,7 @@
 
     <!-- ====== SCRIPT DE COMENTÁRIOS E MENU ====== -->
     <script>
-        let avaliacao = 0;
-
-        function avaliar(valor) {
-            avaliacao = valor;
-            const estrelas = document.querySelectorAll('.estrela');
-            estrelas.forEach((estrela, index) => {
-                estrela.style.color = index < valor ? 'gold' : 'gray';
-            });
-        }
-
-        document.getElementById("formComentario").addEventListener("submit", function (e) {
-            e.preventDefault();
-            const nome = document.getElementById("nome").value;
-            const mensagem = document.getElementById("mensagem").value;
-            const lista = document.getElementById("listaComentarios");
-            if (avaliacao === 0) {
-                alert("Por favor, selecione uma avaliação com estrelas ⭐");
-                return;
-            }
-            const novoComentario = document.createElement("div");
-            novoComentario.classList.add("comentario");
-            novoComentario.innerHTML = `
-                <h3>${nome}</h3>
-                <div class="estrelas-avaliadas">${"★".repeat(avaliacao)}${"☆".repeat(5 - avaliacao)}</div>
-                <p>${mensagem}</p>
-                <hr>
-            `;
-            lista.prepend(novoComentario);
-            document.getElementById("formComentario").reset();
-            avaliar(0);
-        });
+   
 
         // ====== MENU RESPONSIVO ======
         const menuToggle = document.getElementById('menu-toggle');
