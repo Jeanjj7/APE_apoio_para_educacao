@@ -97,6 +97,23 @@ body {
     color: #00c853;
 }
 
+.btn-voltar {
+    background-color: #2e2f33;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 20px;
+    transition: 0.3s;
+}
+
+.btn-voltar:hover {
+    background-color: #444;
+}
+
+
 @media (max-width: 600px) {
     .container {
         padding: 25px;

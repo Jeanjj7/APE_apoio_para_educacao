@@ -26,6 +26,31 @@
             justify-content: center;
         }
 
+        /* ========================
+           BOTÃO VOLTAR
+        ========================= */
+
+        .btn-voltar {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: #ffffff;
+            border: 2px solid var(--azul);
+            padding: 10px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--azul);
+            z-index: 999;
+            transition: 0.2s;
+        }
+
+        .btn-voltar:hover {
+            transform: scale(1.05);
+            background: var(--azul);
+            color: #fff;
+        }
+
         .container {
             width: 100%;
             max-width: 980px;
@@ -115,6 +140,8 @@
 </head>
 <body>
 
+<button class="btn-voltar" onclick="history.back()">⬅ Voltar</button>
+
 <div class="container">
     <h1>👨‍🏫 Painel do Voluntário – APE</h1>
     <p class="lead">Gerencie suas aulas ao vivo, gravações e materiais.</p>
@@ -130,7 +157,6 @@
 </div>
 
 <script>
-
 let aulasCadastradas = [];
 
 // =======================
@@ -148,7 +174,6 @@ function abrirSecao(tipo) {
     marcarBotaoAtivo(tipo);
     const c = document.getElementById("conteudo");
 
-    // 🔴 AULAS AO VIVO — FORMULÁRIO
     if (tipo === "ao-vivo") {
         c.innerHTML = `
             <h2 style="color:var(--azul)">🔴 Cadastrar Aula ao Vivo</h2>
@@ -185,7 +210,6 @@ function abrirSecao(tipo) {
         `;
     }
 
-    // 📅 PRÓXIMAS AULAS
     else if (tipo === "agendadas") {
         const futuras = aulasCadastradas.filter(a => new Date(a.data + "T" + a.inicio) >= new Date());
 
@@ -214,9 +238,7 @@ function abrirSecao(tipo) {
         c.innerHTML = html;
     }
 
-    // 🎥 AULAS GRAVADAS
     else if (tipo === "gravadas") {
-
         const passadas = aulasCadastradas.filter(a => new Date(a.data + "T" + a.inicio) < new Date());
 
         let html = `
@@ -276,7 +298,6 @@ function abrirSecao(tipo) {
         c.innerHTML = html;
     }
 
-    // 📘 MATERIAIS
     else if (tipo === "materiais") {
         c.innerHTML = `
             <h2 style="color:var(--azul)">📘 Materiais</h2>
@@ -343,7 +364,6 @@ function formatarData(d) {
 }
 
 abrirSecao("ao-vivo");
-
 </script>
 
 </body>
