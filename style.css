@@ -8,7 +8,7 @@ body {
 
 /* ====== MENU DE NAVEGAÇÃO ====== */
 header {
-    background-color: #0055ff;
+    background-color: #003eb9;
     padding: 10px 40px;
     position: sticky;
     top: 0;
@@ -23,7 +23,7 @@ nav {
 }
 
 .logo h2 {
-    color: #ffffff;
+    color: #ffffffc7;
     font-weight: 800;
     font-size: 22px;
     margin: 0;
@@ -47,7 +47,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #00c853;
+    color: #0c863f;
 }
 
 /* ====== BOTÃO MENU MOBILE ====== */
@@ -175,14 +175,19 @@ nav ul li a:hover {
 }
 
 .texto_verde {
-    color: #00c853;
+    color: #0b7e3b;
     font-weight: bold;
 }
 
 .texto_azul {
-    color: #1565c0;
+    color: #0c4586;
     font-weight: bold;
 }
+.texto_cinza {
+    color: rgb(214, 214, 214);
+    font-weight: bold;
+}
+
 
 /* ====== FEEDBACK ====== */
 #feedback {
